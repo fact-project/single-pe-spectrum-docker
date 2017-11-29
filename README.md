@@ -40,7 +40,12 @@ These can be called with the docker image:
     --rm -i -e infile="/fact/raw/2012/07/23/20120723_" \
     -e first_run=0 -e last_run=1 \
     -e outpath_spectra="/output/20120723_3_5.root" \
-    spe_spectrum_data.sh
+    --rm -i -t mars sh  spe_spectrum_data.sh
+    
+    docker run -v pedestals/standard_12:/input_data \
+    -v /gpfs1/scratch/:/output_data \
+    -e first_run=1 -e last_run=1 \
+    --rm -i -t mars sh spe_spectrum_mc.sh
 
 ### Environment variables to steer the analysis
 #### Data
