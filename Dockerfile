@@ -42,7 +42,7 @@ RUN curl -L https://github.com/root-project/root/archive/v5-34-00-patches.tar.gz
 	&& rm -rf /home/mars/build_root \
 	&& rm -rf /home/mars/root-5-34-00-patches
 
-RUN svn checkout -r 18907 https://trac.fact-project.org/svn/trunk/Mars --trust-server-cert --non-interactive \
+RUN svn checkout -r 18926 https://trac.fact-project.org/svn/trunk/Mars --trust-server-cert --non-interactive \
 	&& cd Mars \
 	&& make mrproper \
 	&& make -j$CORES  \
