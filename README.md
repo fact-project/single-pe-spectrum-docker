@@ -36,7 +36,11 @@ For convenience reasons there are two shell scripts doing the single pe extracti
 
 These can be called with the docker image:
 
-    docker run -v /fact/raw:/fact/raw -v /gpfs1/scratch:/output --rm -i -e infile="/fact/raw/2012/07/23/20120723_" -e first_run=0 -e last_run=1 -e outpath_spectra="/output/20120723_3_5.root" spe_spectrum_data.sh
+    docker run -v /fact/raw:/fact/raw -v /gpfs1/scratch:/output \
+    --rm -i -e infile="/fact/raw/2012/07/23/20120723_" \
+    -e first_run=0 -e last_run=1 \
+    -e outpath_spectra="/output/20120723_3_5.root" \
+    spe_spectrum_data.sh
 
 ### Environment variables to steer the analysis
 #### Data
