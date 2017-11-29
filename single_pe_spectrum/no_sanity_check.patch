@@ -1,0 +1,70 @@
+Index: mbase/MStatusDisplay.h
+===================================================================
+--- mbase/MStatusDisplay.h	(revision 18926)
++++ mbase/MStatusDisplay.h	(working copy)
+@@ -142,7 +142,9 @@
+
+     // Display helper functions
+     void RemoveTab(int i);
++public:
+     void SetStatusLine(const char *txt, Int_t idx);
++private:
+
+     // Menu helper functions
+     TGPopupMenu *GetPopup(const char *name);
+Index: mmc/MMcEvt.cxx
+===================================================================
+--- mmc/MMcEvt.cxx	(revision 18929)
++++ mmc/MMcEvt.cxx	(working copy)
+@@ -264,33 +264,7 @@
+         return kFALSE;
+     }
+ 
+-    if (!fin.SetRefAddress("MMcEvt.fEvtNumber",         fEvtNumber        ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fThick0",            fThick0           ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fFirstTarget",       fFirstTarget      ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fZFirstInteraction", fZFirstInteraction))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fCoreD",             fCoreD            ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fCoreX",             fCoreX            ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fCoreY",             fCoreY            ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fTimeFirst",         fTimeFirst        ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fTimeLast",          fTimeLast         ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fLongiNmax",         fLongiNmax        ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fLongit0",           fLongit0          ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fLongitmax",         fLongitmax        ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fLongia",            fLongia           ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fLongib",            fLongib           ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fLongic",            fLongic           ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fLongichi2",         fLongichi2        ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fPhotIni",           fPhotIni          ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fPassPhotAtm",       fPassPhotAtm      ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fPassPhotRef",       fPassPhotRef      ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fPassPhotCone",      fPassPhotCone     ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fPhotElfromShower",  fPhotElfromShower ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fPhotElinCamera",    fPhotElinCamera   ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fElecCphFraction",   fElecCphFraction  ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fMuonCphFraction",   fMuonCphFraction  ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fOtherCphFraction",  fOtherCphFraction ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fFadcTimeJitter",    fFadcTimeJitter   ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvt.fEventReuse",        fEventReuse       ))  return kFALSE;
+ 
++
+     return MMcEvtBasic::SetupFits(fin);
+ }
+Index: mmc/MMcEvtBasic.cc
+===================================================================
+--- mmc/MMcEvtBasic.cc	(revision 18929)
++++ mmc/MMcEvtBasic.cc	(working copy)
+@@ -243,12 +243,6 @@
+     }
+ 
+     //if (!fin.SetRefAddress("MMcEvtBasic.fPartId",         fPartId        ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvtBasic.fEnergy",         fEnergy        ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvtBasic.fImpact",         fImpact        ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvtBasic.fTelescopePhi",   fTelescopePhi  ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvtBasic.fTelescopeTheta", fTelescopeTheta))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvtBasic.fTheta",          fTheta         ))  return kFALSE;
+-    if (!fin.SetRefAddress("MMcEvtBasic.fPhi",            fPhi           ))  return kFALSE;
+ 
+     return kTRUE;
+ }

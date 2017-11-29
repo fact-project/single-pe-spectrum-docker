@@ -17,6 +17,8 @@ RUN useradd -m mars
 
 WORKDIR /home/mars
 
+ADD single_pe_spectrum/no_sanity_check.patch /home/mars
+
 RUN curl -O -L https://repo.continuum.io/archive/Anaconda3-4.4.0-Linux-x86_64.sh \
 	&& bash Anaconda3-4.4.0-Linux-x86_64.sh -p /home/mars/anaconda3 -b \
 	&& rm  Anaconda3-4.4.0-Linux-x86_64.sh \
@@ -44,6 +46,7 @@ RUN curl -L https://github.com/root-project/root/archive/v5-34-00-patches.tar.gz
 
 RUN svn checkout -r 18926 https://trac.fact-project.org/svn/trunk/Mars --trust-server-cert --non-interactive \
 	&& cd Mars \
+  && patch -p0 < /home/mars/no_sanity_check.patch \
 	&& make mrproper \
 	&& make -j$CORES  \
 	&& cp libmars.so /usr/lib
