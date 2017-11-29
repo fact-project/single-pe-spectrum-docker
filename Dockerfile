@@ -54,7 +54,31 @@ RUN svn checkout -r 18926 https://trac.fact-project.org/svn/trunk/Mars --trust-s
 ENV PATH=/home/mars/anaconda3/bin:$PATH
 
 ADD rootrc  /home/mars/.rootrc
-RUN chown mars:mars /home/mars/.rootrc 
+RUN chown mars:mars /home/mars/.rootrc
+
+ADD single_pe_spectrum/extract_singles.C /home/mars/Mars
+ADD single_pe_spectrum/extract_singles_mc.C /home/mars/Mars
+ADD single_pe_spectrum/fit_spectra.C /home/mars/Mars
+ADD single_pe_spectrum/fit_spectra_mc.C /home/mars/Mars
+ADD single_pe_spectrum/stdMcDrsFile.drs.fits.gz /home/mars/Mars
+ADD single_pe_spectrum/FACTmapV5a.txt /home/mars/Mars
+ADD single_pe_spectrum/spe_spectrum_mc.sh /home/mars/Mars
+ADD single_pe_spectrum/spe_spectrum_data.sh /home/mars/Mars
+
+RUN chown mars:mars /home/mars/Mars/extract_singles.C
+RUN chown mars:mars /home/mars/Mars/extract_singles_mc.C
+
+RUN chown mars:mars /home/mars/Mars/fit_spectra.C
+RUN chown mars:mars /home/mars/Mars/fit_spectra_mc.C
+
+RUN chown mars:mars /home/mars/Mars/stdMcDrsFile.drs.fits.gz
+RUN chown mars:mars /home/mars/Mars/FACTmapV5a.txt
+
+RUN chown mars:mars /home/mars/Mars/spe_spectrum_mc.sh
+RUN chown mars:mars /home/mars/Mars/spe_spectrum_data.sh
+
+RUN chmod u+x /home/mars/Mars/spe_spectrum_mc.sh
+RUN chmod u+x /home/mars/Mars/spe_spectrum_data.sh
 
 WORKDIR /home/mars/Mars
 CMD bash
