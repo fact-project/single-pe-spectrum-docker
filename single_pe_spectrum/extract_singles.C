@@ -650,7 +650,7 @@ int extract_singles(
                     const char  *drsfile    = "/fact/raw/2012/07/23/20120723_004.drs.fits.gz",
                     const char  *outfile    = ".",
                     Int_t        max_dist   = 14,
-                    Double_t     threshold  =  5,
+                    Double_t     threshold  =  5
                    )
 {
     // ======================================================
