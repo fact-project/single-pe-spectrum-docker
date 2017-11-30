@@ -120,9 +120,9 @@ int fit_spectra(const char *filename = "20130222_018_018.root",
 {
     // Read the mapping between bias channels and hardware channels
     PixelMap pmap;
-    if (!pmap.Read("FACTmap111030.txt"))
+    if (!pmap.Read("FACTmapV5a.txt"))
     {
-        cout << "FACTmap111030.txt not found." << endl;
+        cout << "FACTmapV5a.txt not found." << endl;
         return 1;
     }
 
