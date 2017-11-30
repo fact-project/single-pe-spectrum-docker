@@ -36,7 +36,7 @@ For convenience reasons there are two shell scripts doing the single pe extracti
     
 In thsi case input parameters for the macros are handled via environment variables
 
-### How to run the shell scripts when starting docker container
+### How to run the shell scripts when starting the docker container?
 
 #### Data
 Example call:
