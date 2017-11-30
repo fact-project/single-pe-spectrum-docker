@@ -681,7 +681,7 @@ int extract_singles(
     bool usemap = true;
 
     // map file to use (get that from La Palma!)
-    const char *map = usemap ? "/home/jbuss/software/mars_spe_analysis/FACTmapV5a.txt" : NULL;
+    const char *map = usemap ? "./FACTmapV5a.txt" : NULL;
 
     // ------------------------------------------------------
 
