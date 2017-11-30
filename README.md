@@ -33,15 +33,33 @@ For convenience reasons there are two shell scripts doing the single pe extracti
 
     spe_spectrum_data.sh
     spe_spectrum_mc.sh
-
-These can be called with the docker image:
-
-    docker run -v /fact/raw:/fact/raw -v /gpfs1/scratch:/output \
-    --rm -i -e infile="/fact/raw/2012/07/23/20120723_" \
-    -e first_run=0 -e last_run=1 \
-    -e outpath_spectra="/output/20120723_3_5.root" \
-    --rm -i -t mars sh  spe_spectrum_data.sh
     
+In thsi case input parameters for the macros are handled via environment variables
+
+### How to run the shell scripts when starting docker container
+
+#### Data
+Example call:
+
+    docker run -v /raw/2015/11/08/:/input_data -v \
+    <path_to_directory_for_results>:/output_data \
+    -e first_run=9 -e last_run=9 \
+    -e drsfile="/input_data/20151108_004.drs.fits.gz" \
+    -e infile="/input_data/20151108_" \
+    --rm -i -t mars sh spe_spectrum_data.sh
+    
+Environment variables:
+* **drsfile** - path to the drs file
+* **infile** - path to the input file with suffix (e.g. `/input_data/20151108_`)
+* **first_run** - first run to analyse 
+(e.g. `9` in case of `/20151108_009.fits.gz`)
+* **last_run** - first run to analyse (e.g. `10` in case of `/20151108_010.fits.gz`)
+* **outpath_spectra** - path to store the result of the spectra extraction (e.g. `output/20151108_9_10.root` )
+* **outpath_fit** - path to store the result of the spectrum fit (e.g. `output/20151108_9_10_fit.root` )
+
+#### MC
+Example call: 
+
     docker run -v <path_to_directory_with_pedestal_simulations>:/input_data \
     -v <path_to_directory_for_results>:/output_data \
     -e first_run=0 -e last_run=9 \
@@ -49,26 +67,18 @@ These can be called with the docker image:
     -e outpath_fit="/output_data/single_pe_spectra_fit.root" \
     --rm -i -t mars sh spe_spectrum_mc.sh
 
-### Environment variables to steer the analysis
-#### Data
-* **drsfile** - path to the drs file
-* **infile** - path to the input file with suffix (e.g. `/fact/raw/2012/07/23/20120723_`)
-* **first_run** - first run to analyse (e.g. `3` in case of `20120723_003.fits.gz`)
-* **last_run** - first run to analyse (e.g. `5` in case of `20120723_005.fits.gz`)
-* **outpath_spectra** - path to store the result of the spectra extraction (e.g. `output/20120723_3_5.root` )
-* **outpath_fit** - path to store the result of the spectrum fit (e.g. `output/20120723_3_5_fit.root` )
+Environment variables:
 
-#### MC
 * **drsfile** - path to the drs file
 * **infolder** - path to the input folder with suffix (e.g. `/fact/sim/pedestal_sim`)
 * **suffix** - pattern of the filename ending of the files in this folder (default `.001_P_MonteCarlo000_Events.fits.gz`)
-* **first_run** - first run to analyse (e.g. `3` in case of `00000003.001_P_MonteCarlo000_Events.fits.gz`)
-* **last_run** - first run to analyse (e.g. `5` in case of `00000005.001_P_MonteCarlo000_Events.fits.gz`)
-* **outpath_spectra** - path to store the result of the spectra extraction (e.g. `output/pedestal_sim_3_5.root` )
-* **outpath_fit** - path to store the result of the spectrum fit (e.g. `output/pedestal_sim_3_5_fit.root` )
+* **first_run** - first run to analyse (e.g. `0` in case of `00000000.001_P_MonteCarlo000_Events.fits.gz`)
+* **last_run** - first run to analyse (e.g. `9` in case of `000000009.001_P_MonteCarlo000_Events.fits.gz`)
+* **outpath_spectra** - path to store the result of the spectra extraction (e.g. `output/pedestal_sim_0_9.root` )
+* **outpath_fit** - path to store the result of the spectrum fit (e.g. `output/pedestal_sim_0_9_fit.root` )
 
 
-## Install on your host, this is tested on Ubuntu 16.04 and 17.04
+## Install on your host
 
 First install the mandatory and optional dependencies of root
 
