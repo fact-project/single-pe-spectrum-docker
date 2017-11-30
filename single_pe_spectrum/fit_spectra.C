@@ -615,7 +615,7 @@ int fit_spectra(const char *filename = "20130222_018_018.root",
         hCrosstalkP1.Fill(fCrosstalkP);
         hCoeffR1.Fill(    fCoeffR);
 
-        if (!pmap.index(pixel).isTM())
+        if ((pixel+1)%9 != 0)
         {
             hRate2.Fill(      fRate);
             hGain2.Fill(      fGain);
@@ -634,7 +634,7 @@ int fit_spectra(const char *filename = "20130222_018_018.root",
         for (int b=1; b<=hist->GetNbinsX(); b++)
             hSumScale1.Fill((hist->GetBinCenter(b)-fOffset)/fGain, hist->GetBinContent(b));
 
-        if (!pmap.index(pixel).isTM())
+        if ((pixel+1)%9 != 0)
             for (int b=1; b<=hist->GetNbinsX(); b++)
                 hSumScale2.Fill((hist->GetBinCenter(b)-fOffset)/fGain, hist->GetBinContent(b));
 
@@ -643,7 +643,7 @@ int fit_spectra(const char *filename = "20130222_018_018.root",
         // Because of the rebinning...
         hist = hsignal->ProjectionY("proj", pixel+1, pixel+1);
         hSumClear1.Add(hist);
-        if (!pmap.index(pixel).isTM())
+        if ((pixel+1)%9 != 0)
             hSumClear2.Add(hist);
         delete hist;
 
