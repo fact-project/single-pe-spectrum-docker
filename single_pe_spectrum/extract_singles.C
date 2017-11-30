@@ -658,8 +658,10 @@ int extract_singles(
     MDirIter iter;
 
     if (!gSystem->AccessPathName(outfile))
+    {
+	gLog << warn << "Outputfile " << outfile << " allready exists" << endl;
         return 0;
-
+    }
     // add input files to directory iterator
     for (Int_t fileNr = firstRunID; fileNr <= lastRunID; fileNr++)
     {
