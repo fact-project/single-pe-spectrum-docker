@@ -42,9 +42,11 @@ These can be called with the docker image:
     -e outpath_spectra="/output/20120723_3_5.root" \
     --rm -i -t mars sh  spe_spectrum_data.sh
     
-    docker run -v pedestals/standard_12:/input_data \
-    -v /gpfs1/scratch/:/output_data \
-    -e first_run=1 -e last_run=1 \
+    docker run -v <path_to_directory_with_pedestal_simulations>:/input_data \
+    -v <path_to_directory_for_results>:/output_data \
+    -e first_run=0 -e last_run=9 \
+    -e outpath_spectra="/output_data/single_pe_spectra.root" \
+    -e outpath_fit="/output_data/single_pe_spectra_fit.root" \
     --rm -i -t mars sh spe_spectrum_mc.sh
 
 ### Environment variables to steer the analysis
